@@ -1,37 +1,38 @@
 #!/usr/bin/env python3
-"""
+'""'
 Leaflow 多账号自动签到脚本
 变量名：LEAFLOW_ACCOUNTS
 变量值：邮箱1:密码1,邮箱2:密码2,邮箱3:密码3
-"""
+'""'
 
-import os
-import time
-import logging
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.action_chains import ActionChains
-import requests
-from datetime import datetime
+导入 os
+导入 时间
+导入 日志记录
+从 selenium.common.exceptions 导入TimeoutException
+从 selenium 导入 webdriver
+从 selenium.webdriver.common.by 导入 By
+从 selenium.webdriver.support.ui 导入 WebDriverWait
+从 selenium.webdriver.support 导入 expected_conditions 别名为 EC
+从 selenium.webdriver.chrome.options 导入 Options
+从 selenium.webdriver.common.action_chains 导入 ActionChains
+导入 请求
+从 日期时间 导入 日期时间
 
 # 配置日志
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+记录日志。基本配置(级别=logging。信息, 格式='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-class LeaflowAutoCheckin:
-    def __init__(self, email, password):
-        self.email = email
-        self.password = password
+类 Leaflow自动签到：
+    定义 __init__(self, email, password):
+        self.邮箱 = 邮箱
+        self.密码 = 密码
         self.telegram_bot_token = os.getenv('TELEGRAM_BOT_TOKEN', '')
         self.telegram_chat_id = os.getenv('TELEGRAM_CHAT_ID', '')
         
-        if not self.email or not self.password:
-            raise ValueError("邮箱和密码不能为空")
+        如果 不是 自己.邮箱 或者 不是 自己.密码:
+            抛出  ValueError("邮箱和密码不能为空")
         
-        self.driver = None
+        self.driver = 无
         self.setup_driver()
     
     def setup_driver(self):
@@ -640,3 +641,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
