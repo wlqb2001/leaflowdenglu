@@ -3,7 +3,7 @@
 Leaflow 多账号自动签到脚本
 变量名：LEAFLOW_ACCOUNTS
 变量值：邮箱1:密码1,邮箱2:密码2,邮箱3:密码3
-'""'
+''''
 
 导入 os
 导入 时间
@@ -29,7 +29,7 @@ logger = logging.getLogger(__name__)
         self.telegram_bot_token = os.getenv('TELEGRAM_BOT_TOKEN', '')
         self.telegram_chat_id = os.getenv('TELEGRAM_CHAT_ID', '')
         
-        如果 不是 自己.邮箱 或者 不是 自己.密码:
+        如果不是自己.邮箱 或者 不是自己.密码:
             抛出  ValueError("邮箱和密码不能为空")
         
         self.driver = 无
@@ -641,4 +641,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
