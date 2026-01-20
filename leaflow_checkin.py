@@ -55,8 +55,8 @@ logger = logging.getLogger(__name__)
         self.driver = webdriver.Chrome(options=chrome_options)
         self.driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
         
-    def close_popup(self):
-        """关闭初始弹窗"""
+    关闭弹窗
+从 selenium.webdriver.common.by 导入 By#!/usr/bin/env python3"""
         try:
             logger.info("尝试关闭初始弹窗...")
             time.sleep(3)  # 等待弹窗加载
@@ -272,7 +272,7 @@ logger = logging.getLogger(__name__)
             return "未知"
     
     def wait_for_checkin_page_loaded(self, max_retries=3, wait_time=20):
-        """等待签到页面完全加载，支持重试"""
+        等待签到页面完全加载,支持重试
         for attempt in range(max_retries):
             logger.info(f"等待签到页面加载，尝试 {attempt + 1}/{max_retries}，等待 {wait_time} 秒...")
             time.sleep(wait_time)
@@ -641,6 +641,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
