@@ -1,38 +1,38 @@
 #!/usr/bin/env python3
 """
-
+Leaflow 多账号自动签到脚本
 变量名：LEAFLOW_ACCOUNTS
 变量值：邮箱1:密码1,邮箱2:密码2,邮箱3:密码3
-''''''
+"""
 
-导入 os
-导入 时间
-导入 日志记录
-从 selenium.common.exceptions 导入TimeoutException
-从 selenium 导入 webdriver
-从 selenium.webdriver.common.by 导入 By
-从 selenium.webdriver.support.ui 导入 WebDriverWait
-从 selenium.webdriver.support 导入 expected_conditions 别名为 EC
-从 selenium.webdriver.chrome.options 导入 Options
-从 selenium.webdriver.common.action_chains 导入 ActionChains
-导入 请求
-从 日期时间 导入 日期时间
+import os
+import time
+import logging
+from selenium.common.exceptions import TimeoutException
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.action_chains import ActionChains
+import requests
+from datetime import datetime
 
 # 配置日志
-记录日志。基本配置(级别=logging。信息, 格式='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-类 Leaflow自动签到：
-    定义 __init__(self, email, password):
-        self.邮箱 = 邮箱
-        self.密码 = 密码
+class LeaflowAutoCheckin:
+    def __init__(self, email, password):
+        self.email = email
+        self.password = password
         self.telegram_bot_token = os.getenv('TELEGRAM_BOT_TOKEN', '')
         self.telegram_chat_id = os.getenv('TELEGRAM_CHAT_ID', '')
         
-        如果不是自己.邮箱 或者 不是自己.密码:
-            抛出  ValueError("邮箱和密码不能为空")
+        if not self.email or not self.password:
+            raise ValueError("邮箱和密码不能为空")
         
-        self.driver = 无
+        self.driver = None
         self.setup_driver()
     
     def setup_driver(self):
@@ -55,8 +55,8 @@ logger = logging.getLogger(__name__)
         self.driver = webdriver.Chrome(options=chrome_options)
         self.driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
         
-    关闭弹窗
-从 selenium.webdriver.common.by 导入 By#!/usr/bin/env python3"""
+    def close_popup(self):
+        """关闭初始弹窗"""
         try:
             logger.info("尝试关闭初始弹窗...")
             time.sleep(3)  # 等待弹窗加载
@@ -272,7 +272,7 @@ logger = logging.getLogger(__name__)
             return "未知"
     
     def wait_for_checkin_page_loaded(self, max_retries=3, wait_time=20):
-        等待签到页面完全加载,支持重试
+        """等待签到页面完全加载，支持重试"""
         for attempt in range(max_retries):
             logger.info(f"等待签到页面加载，尝试 {attempt + 1}/{max_retries}，等待 {wait_time} 秒...")
             time.sleep(wait_time)
@@ -641,7 +641,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-
